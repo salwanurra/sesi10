@@ -1,7 +1,12 @@
+import { useDispatch } from "react-redux";
+import {addBook} from "../../features/bookSlice"
+
 function CreateBook ({ setListBooks, listBooks,setBook, book, uuid}) {
+    const dispatch = useDispatch()
     const createBook = () => {
-        localStorage.setItem('books', JSON.stringify([...listBooks, { book: book, id: uuid }]))
+        // localStorage.setItem('books', JSON.stringify([...listBooks, { book: book, id: uuid }]))
         setListBooks([...listBooks, { book: book, id: uuid }])
+        dispatch(addBook(listBooks))
     }
     return (
         <div>

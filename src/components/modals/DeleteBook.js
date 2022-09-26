@@ -1,9 +1,12 @@
-function DeleteBook({book, bookId, listBooks, setListBooks}) {
+import { useDispatch } from "react-redux";
+import { deleteBook } from "../../features/bookSlice"
 
-    const deleteBook = () => {
+function DeleteBook({book, bookId, listBooks, setListBooks}) {
+    const dispatch = useDispatch()
+    const deleteItem = () => {
         const filteredBook = listBooks.filter((book) => (book.id !== bookId))
         setListBooks([...filteredBook])
-        localStorage.setItem('books', JSON.stringify(filteredBook));
+        dispatch(deleteBook(listBooks))
     }
     return (
         <div>
@@ -13,7 +16,7 @@ function DeleteBook({book, bookId, listBooks, setListBooks}) {
                     <h3 className="font-bold text-lg text-center">Are you sure to delete {book}?</h3>
                     <div className="modal-action flex justify-center">
                         <label htmlFor="modalDelete" className="btn bg-[#9a9595] text-white mr-3">Cancel</label>
-                        <label htmlFor="modalDelete" className="btn bg-error text-white" onClick={deleteBook}>Delete</label>
+                        <label htmlFor="modalDelete" className="btn bg-error text-white" onClick={deleteItem}>Delete</label>
                     </div>
                 </div>
             </div>
